@@ -73,16 +73,30 @@ func TestFrameworkCompare(t *testing.T) {
 }
 
 func TestFrameworkHighestLowest(t *testing.T) {
+	// Test IETF requirements framework
 	f := IETF()
 
 	highest := f.Highest()
 	if highest.ID != "must" {
-		t.Errorf("Highest().ID = %q, want %q", highest.ID, "must")
+		t.Errorf("IETF Highest().ID = %q, want %q", highest.ID, "must")
 	}
 
 	lowest := f.Lowest()
-	if lowest.ID != "must-not" {
-		t.Errorf("Lowest().ID = %q, want %q", lowest.ID, "must-not")
+	if lowest.ID != "may" {
+		t.Errorf("IETF Lowest().ID = %q, want %q", lowest.ID, "may")
+	}
+
+	// Test IETF prohibitions framework
+	fp := IETFProhibitions()
+
+	highest = fp.Highest()
+	if highest.ID != "must-not" {
+		t.Errorf("IETFProhibitions Highest().ID = %q, want %q", highest.ID, "must-not")
+	}
+
+	lowest = fp.Lowest()
+	if lowest.ID != "should-not" {
+		t.Errorf("IETFProhibitions Lowest().ID = %q, want %q", lowest.ID, "should-not")
 	}
 }
 
