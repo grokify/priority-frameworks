@@ -45,7 +45,8 @@ Levels are ordered by **implementation priority** (index 0 = highest). This orde
 |-----------|---------------------------|----------|
 | **Severity** | Critical, High, Medium, Low, Informational | Security, incidents, bugs |
 | **Priority (P#)** | P0, P1, P2, P3, P4 | Engineering work prioritization |
-| **IETF RFC 2119** | MUST, SHOULD, MAY, SHOULD NOT, MUST NOT | Technical specifications |
+| **IETF RFC 2119** | MUST, SHOULD, MAY | Requirements - what to implement |
+| **IETF Prohibitions** | MUST NOT, SHOULD NOT | Compliance - constraints to validate |
 | **MoSCoW** | Must have, Should have, Could have, Won't have | Agile, product management |
 | **General** | Required, Recommended, Optional, Avoid | General-purpose requirement levels |
 
