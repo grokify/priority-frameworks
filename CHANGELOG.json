@@ -9,7 +9,7 @@
     {
       "version": "v0.1.0",
       "date": "2026-06-06",
-      "commit": "32286b3",
+      "commit": "a09fcbf",
       "highlights": [
         { "description": "Go library for standardized priority level definitions with 5 built-in frameworks and cross-framework normalization" }
       ],
