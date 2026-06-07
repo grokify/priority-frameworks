@@ -52,11 +52,17 @@ This package provides a unified interface for working with different prioritizat
 ```go
 import pf "github.com/grokify/priority-frameworks"
 
-// Get a built-in framework
+// Get a built-in framework (returns nil if not found)
 framework := pf.Get("severity")
+if framework == nil {
+    log.Fatal("unknown framework")
+}
 
-// Parse a level
+// Parse a level (returns nil if not found)
 level := framework.Parse("Critical")
+if level == nil {
+    log.Fatal("unknown level")
+}
 fmt.Println(level.Name)       // "Critical"
 fmt.Println(level.Actionable) // true
 fmt.Println(level.Color)      // "#7f1d1d"
