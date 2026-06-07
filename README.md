@@ -39,11 +39,13 @@ This package provides a unified interface for working with different prioritizat
 
 ## Built-in Frameworks
 
-| Framework | Levels | Use Case |
-|-----------|--------|----------|
+Levels are ordered by **implementation priority** (index 0 = highest). This ordering is designed to drive code actions - items to implement come before items to avoid.
+
+| Framework | Levels (highest → lowest) | Use Case |
+|-----------|---------------------------|----------|
 | **Severity** | Critical, High, Medium, Low, Informational | Security, incidents, bugs |
 | **Priority (P#)** | P0, P1, P2, P3, P4 | Engineering work prioritization |
-| **IETF RFC 2119** | MUST, MUST NOT, SHOULD, SHOULD NOT, MAY | Technical specifications |
+| **IETF RFC 2119** | MUST, SHOULD, MAY, SHOULD NOT, MUST NOT | Technical specifications |
 | **MoSCoW** | Must have, Should have, Could have, Won't have | Agile, product management |
 | **General** | Required, Recommended, Optional, Avoid | General-purpose requirement levels |
 
@@ -168,6 +170,7 @@ custom := &pf.Framework{
 ## Design
 
 - **Position = Priority**: Level position in the `Levels` slice determines priority (index 0 = highest)
+- **Action-oriented ordering**: Levels are ordered to drive code actions - things to implement before things to avoid (e.g., IETF: MUST before MUST NOT)
 - **Simple data types**: Frameworks are plain structs, easily serializable to JSON/YAML
 - **Actionable flag**: Distinguishes between levels that require action vs. informational
 - **Aliases**: Multiple names can map to the same level (e.g., "CRITICAL", "Crit", "S1")
