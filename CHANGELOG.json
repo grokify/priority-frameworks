@@ -9,9 +9,13 @@
     {
       "version": "v0.2.0",
       "date": "2026-06-06",
-      "commit": "baa187f",
+      "commit": "f3e6a44",
       "highlights": [
-        { "description": "Score-to-level mapping with built-in CVSS support, and level counting for dashboards and reports" }
+        { "description": "Score-to-level mapping with built-in CVSS support, and level counting for dashboards and reports" },
+        { "description": "IETF RFC 2119 split into requirements (MUST/SHOULD/MAY) and prohibitions (MUST NOT/SHOULD NOT) frameworks" }
+      ],
+      "breaking": [
+        { "description": "`IETF()` now returns only MUST, SHOULD, MAY levels; use `IETFProhibitions()` for MUST NOT, SHOULD NOT", "commit": "a0677a9" }
       ],
       "added": [
         { "description": "`ScoreRange` type for mapping numeric score ranges to framework levels", "commit": "887ce33" },
@@ -21,14 +25,18 @@
         { "description": "`LevelCounts` type for tracking item counts per priority level", "commit": "d41727c" },
         { "description": "`Total()`, `ActionableTotal()`, `HigherThan()`, `LowerThan()` count aggregations", "commit": "d41727c" },
         { "description": "`Merge()`, `Clone()`, `Reset()` for combining and managing counts", "commit": "d41727c" },
-        { "description": "`Slice()` returns counts in framework level order", "commit": "d41727c" }
+        { "description": "`Slice()` returns counts in framework level order", "commit": "d41727c" },
+        { "description": "`IETFProhibitions()` framework for compliance validation (MUST NOT, SHOULD NOT)", "commit": "a0677a9" }
+      ],
+      "changed": [
+        { "description": "`IETF()` simplified to 3 levels (MUST, SHOULD, MAY) for prioritization", "commit": "a0677a9" }
       ],
       "tests": [
         { "description": "Comprehensive tests for ScoreRange and LevelCounts", "commit": "408bb6d" }
       ],
       "documentation": [
         { "description": "Clarify action-oriented level ordering in README (items to implement before items to avoid)", "commit": "baa187f" },
-        { "description": "Fix IETF RFC 2119 level order in README to match code", "commit": "baa187f" }
+        { "description": "Document IETF/IETFProhibitions split for requirements vs compliance", "commit": "f3e6a44" }
       ]
     },
     {
