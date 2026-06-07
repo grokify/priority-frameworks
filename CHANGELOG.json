@@ -1,0 +1,42 @@
+{
+  "irVersion": "1.0",
+  "project": "priority-frameworks",
+  "repository": "https://github.com/grokify/priority-frameworks",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "maintainers": ["grokify"],
+  "releases": [
+    {
+      "version": "v0.1.0",
+      "date": "2026-06-06",
+      "commit": "32286b3",
+      "highlights": [
+        { "description": "Go library for standardized priority level definitions with 5 built-in frameworks and cross-framework normalization" }
+      ],
+      "added": [
+        { "description": "Core `Framework` and `Level` types for defining priority systems", "commit": "b181fd0" },
+        { "description": "Built-in `Severity` framework (Critical, High, Medium, Low, Info)", "commit": "57ffbb9" },
+        { "description": "Built-in `Priority` framework (P0-P4 urgency levels)", "commit": "57ffbb9" },
+        { "description": "Built-in `IETF` framework (RFC 2119 requirement levels: MUST, SHOULD, MAY)", "commit": "57ffbb9" },
+        { "description": "Built-in `MoSCoW` framework (Must Have, Should Have, Could Have, Won't Have)", "commit": "57ffbb9" },
+        { "description": "Built-in `General` framework (High, Medium, Low)", "commit": "57ffbb9" },
+        { "description": "`Normalize()` function for converting levels to comparable numeric scale (0-100)", "commit": "7c598cd" },
+        { "description": "`CompareAcross()` function for comparing priorities across different frameworks", "commit": "7c598cd" },
+        { "description": "`MapTo()` function for finding equivalent levels between frameworks", "commit": "7c598cd" },
+        { "description": "`GetLevelByID()` and `GetLevelByNameOrAlias()` lookup functions", "commit": "b181fd0" }
+      ],
+      "tests": [
+        { "description": "Unit tests for framework lookups, normalization, and cross-framework comparison", "commit": "639b8fe" }
+      ],
+      "documentation": [
+        { "description": "README with usage examples for all frameworks and normalization", "commit": "5773511" },
+        { "description": "Badge shields for Go version, license, and Go Report Card", "commit": "32286b3" }
+      ],
+      "build": [
+        { "description": "GitHub Actions CI workflows for testing, linting, and CodeQL", "commit": "321a6fb" },
+        { "description": "Dependabot configuration for automated dependency updates", "commit": "321a6fb" },
+        { "description": "golangci-lint configuration with gosec, staticcheck, and other linters", "commit": "321a6fb" }
+      ]
+    }
+  ]
+}
