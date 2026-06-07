@@ -9,6 +9,7 @@
     {
       "version": "v0.2.0",
       "date": "2026-06-06",
+      "commit": "a98743d",
       "highlights": [
         { "description": "Score-to-level mapping with built-in CVSS support, and level counting for dashboards and reports" }
       ],
