@@ -101,6 +101,53 @@ mapped := pf.MapTo(severity, "critical", moscow)
 fmt.Println(mapped.Name) // "Must have"
 ```
 
+## Score Ranges
+
+Map numeric scores to priority levels (e.g., CVSS scores to severity):
+
+```go
+// Built-in CVSS score range
+sr := pf.CVSSScoreRange()
+level, err := sr.LevelFromScore(7.5)
+if err != nil {
+    log.Fatal(err)
+}
+fmt.Println(level.Name) // "High"
+
+// CVSS thresholds: Critical (9.0+), High (7.0+), Medium (4.0+), Low (0.1+), Info (0)
+
+// Custom percentage-based range
+sr := pf.PercentageScoreRange(pf.Severity())
+level, _ := sr.LevelFromScore(85.0)  // "Critical" (75%+)
+```
+
+## Level Counts
+
+Track counts of items at each priority level:
+
+```go
+counts := pf.NewLevelCounts(pf.Severity())
+
+// Add counts
+counts.Increment("critical")
+counts.Add("high", 5)
+counts.Add("medium", 10)
+
+// Query counts
+fmt.Println(counts.Total())           // 16
+fmt.Println(counts.ActionableTotal()) // 16 (excludes Informational)
+fmt.Println(counts.HigherThan("medium"))      // 6 (Critical + High)
+fmt.Println(counts.HigherThanOrEqual("high")) // 6 (Critical + High)
+
+// Merge from another source
+otherCounts := pf.NewLevelCounts(pf.Severity())
+otherCounts.Add("critical", 3)
+counts.Merge(otherCounts)
+
+// Get counts in framework order
+slice := counts.Slice() // [4, 5, 10, 0, 0] (Critical to Informational)
+```
+
 ## Custom Frameworks
 
 Create your own framework:
