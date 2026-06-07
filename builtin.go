@@ -2,11 +2,12 @@ package priorityframeworks
 
 // FrameworkID constants for built-in frameworks.
 const (
-	IDSeverity = "severity"
-	IDPriority = "priority"
-	IDIETF     = "ietf"
-	IDMoSCoW   = "moscow"
-	IDGeneral  = "general"
+	IDSeverity         = "severity"
+	IDPriority         = "priority"
+	IDIETF             = "ietf"
+	IDIETFProhibitions = "ietf-prohibitions"
+	IDMoSCoW           = "moscow"
+	IDGeneral          = "general"
 )
 
 // AllBuiltinIDs returns all built-in framework IDs.
@@ -15,6 +16,7 @@ func AllBuiltinIDs() []string {
 		IDSeverity,
 		IDPriority,
 		IDIETF,
+		IDIETFProhibitions,
 		IDMoSCoW,
 		IDGeneral,
 	}
@@ -30,6 +32,8 @@ func Get(id string) *Framework {
 		return Priority()
 	case IDIETF:
 		return IETF()
+	case IDIETFProhibitions:
+		return IETFProhibitions()
 	case IDMoSCoW:
 		return MoSCoW()
 	case IDGeneral:
@@ -45,6 +49,7 @@ func All() []*Framework {
 		Severity(),
 		Priority(),
 		IETF(),
+		IETFProhibitions(),
 		MoSCoW(),
 		General(),
 	}
@@ -84,20 +89,33 @@ func Priority() *Framework {
 	}
 }
 
-// IETF returns the IETF RFC 2119 framework.
-// Standard for requirement specification in technical documents.
-// Ordered by implementation priority: actions to take, then actions to avoid.
+// IETF returns the IETF RFC 2119 requirements framework (MUST/SHOULD/MAY).
+// Use this for prioritizing requirements - what to implement.
+// For prohibitions (MUST NOT/SHOULD NOT), use IETFProhibitions().
 func IETF() *Framework {
 	return &Framework{
 		ID:          IDIETF,
 		Name:        "IETF RFC 2119",
-		Description: "Requirement levels from RFC 2119. Standard for technical specifications.",
+		Description: "Requirement levels from RFC 2119 for prioritizing what to implement.",
 		Levels: []Level{
 			{ID: "must", Name: "MUST", Aliases: []string{"REQUIRED", "SHALL"}, Actionable: true, Color: "#dc2626"},
 			{ID: "should", Name: "SHOULD", Aliases: []string{"RECOMMENDED"}, Actionable: true, Color: "#ea580c"},
 			{ID: "may", Name: "MAY", Aliases: []string{"OPTIONAL"}, Actionable: false, Color: "#16a34a"},
-			{ID: "should-not", Name: "SHOULD NOT", Aliases: []string{"NOT RECOMMENDED"}, Actionable: true, Color: "#ca8a04"},
+		},
+	}
+}
+
+// IETFProhibitions returns the IETF RFC 2119 prohibitions framework (MUST NOT/SHOULD NOT).
+// Use this for compliance checking - constraints to validate against.
+// For requirements (MUST/SHOULD/MAY), use IETF().
+func IETFProhibitions() *Framework {
+	return &Framework{
+		ID:          IDIETFProhibitions,
+		Name:        "IETF RFC 2119 Prohibitions",
+		Description: "Prohibition levels from RFC 2119 for compliance validation.",
+		Levels: []Level{
 			{ID: "must-not", Name: "MUST NOT", Aliases: []string{"SHALL NOT"}, Actionable: true, Color: "#7f1d1d"},
+			{ID: "should-not", Name: "SHOULD NOT", Aliases: []string{"NOT RECOMMENDED"}, Actionable: true, Color: "#ca8a04"},
 		},
 	}
 }
