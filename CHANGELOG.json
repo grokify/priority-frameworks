@@ -29,8 +29,10 @@
         { "description": "Unit tests for framework lookups, normalization, and cross-framework comparison", "commit": "639b8fe" }
       ],
       "documentation": [
-        { "description": "README with usage examples for all frameworks and normalization", "commit": "5773511" },
-        { "description": "Badge shields for Go version, license, and Go Report Card", "commit": "32286b3" }
+        { "description": "README with installation, usage examples, and API documentation", "commit": "5773511" },
+        { "description": "Badge shields for CI, Go Report Card, and license", "commit": "32286b3" },
+        { "description": "`All()` and `AllBuiltinIDs()` functions documented in README" },
+        { "description": "Contributing section with link to CHANGELOG" }
       ],
       "build": [
         { "description": "GitHub Actions CI workflows for testing, linting, and CodeQL", "commit": "321a6fb" },

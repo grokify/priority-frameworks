@@ -27,6 +27,12 @@
 
 Pluggable prioritization systems for Go applications.
 
+## Installation
+
+```bash
+go get github.com/grokify/priority-frameworks
+```
+
 ## Overview
 
 This package provides a unified interface for working with different prioritization frameworks. Instead of hardcoding a single priority system, applications can allow users to choose the framework that fits their organization's practices.
@@ -39,7 +45,7 @@ This package provides a unified interface for working with different prioritizat
 | **Priority (P#)** | P0, P1, P2, P3, P4 | Engineering work prioritization |
 | **IETF RFC 2119** | MUST, MUST NOT, SHOULD, SHOULD NOT, MAY | Technical specifications |
 | **MoSCoW** | Must have, Should have, Could have, Won't have | Agile, product management |
-| **General** | Required, Recommended, Optional, Avoid | General-purpose requirements |
+| **General** | Required, Recommended, Optional, Avoid | General-purpose requirement levels |
 
 ## Usage
 
@@ -64,6 +70,10 @@ lowest := framework.Lowest()   // Informational
 
 // Get only actionable levels
 actionable := framework.ActionableLevels()
+
+// List all built-in frameworks
+ids := pf.AllBuiltinIDs()    // ["severity", "priority", "ietf", "moscow", "general"]
+frameworks := pf.All()       // []*Framework
 ```
 
 ## Cross-Framework Normalization
@@ -109,6 +119,10 @@ custom := &pf.Framework{
 - **Actionable flag**: Distinguishes between levels that require action vs. informational
 - **Aliases**: Multiple names can map to the same level (e.g., "CRITICAL", "Crit", "S1")
 
+## Contributing
+
+Contributions are welcome. Please see the [CHANGELOG](CHANGELOG.md) for recent changes.
+
 ## License
 
-MIT
+MIT - see [LICENSE](LICENSE) for details.
