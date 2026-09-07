@@ -147,6 +147,29 @@ func TestNormalize(t *testing.T) {
 	}
 }
 
+func TestNormalizeDistribution(t *testing.T) {
+	// A 5-level framework should spread across all four buckets, with the
+	// endpoints pinned to Critical and Low (index/(total-1) mapping).
+	severity := Severity()
+	want := map[string]NormalizedPriority{
+		"critical":      NormalizedCritical,
+		"high":          NormalizedHigh,
+		"medium":        NormalizedMedium,
+		"low":           NormalizedLow,
+		"informational": NormalizedLow,
+	}
+	for id, exp := range want {
+		if got := Normalize(severity, id); got != exp {
+			t.Errorf("Normalize(severity, %q) = %v, want %v", id, got, exp)
+		}
+	}
+
+	// Single-level framework maps to Critical.
+	if got := NormalizeIndex(0, 1); got != NormalizedCritical {
+		t.Errorf("NormalizeIndex(0, 1) = %v, want Critical", got)
+	}
+}
+
 func TestCompareAcross(t *testing.T) {
 	severity := Severity()
 	moscow := MoSCoW()

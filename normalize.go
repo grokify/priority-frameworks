@@ -41,12 +41,19 @@ func Normalize(f *Framework, levelID string) NormalizedPriority {
 }
 
 // NormalizeIndex converts a level index and total count to normalized priority.
+//
+// The ratio is computed as index/(total-1) so the endpoints map cleanly:
+// index 0 is always Critical and the final index is always Low, with the
+// middle levels distributed evenly. A single-level framework maps to Critical.
 func NormalizeIndex(index, total int) NormalizedPriority {
 	if total <= 0 {
 		return NormalizedMedium
 	}
-	// Map to 4 buckets
-	ratio := float64(index) / float64(total)
+	if total == 1 {
+		return NormalizedCritical
+	}
+	// Map to 4 buckets, spreading endpoints across the full range.
+	ratio := float64(index) / float64(total-1)
 	switch {
 	case ratio < 0.25:
 		return NormalizedCritical
@@ -79,9 +86,9 @@ func CompareAcross(fA *Framework, levelA string, fB *Framework, levelB string) i
 func MapTo(src *Framework, srcLevel string, dst *Framework) *Level {
 	norm := Normalize(src, srcLevel)
 	// Find the level in dst that maps to the same normalized priority
-	for i, l := range dst.Levels {
+	for i := range dst.Levels {
 		if NormalizeIndex(i, len(dst.Levels)) == norm {
-			return &l
+			return &dst.Levels[i]
 		}
 	}
 	// Fallback to default
