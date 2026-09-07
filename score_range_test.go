@@ -1,6 +1,7 @@
 package priorityframeworks
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -91,6 +92,41 @@ func TestPercentageScoreRangeNilFramework(t *testing.T) {
 	sr := PercentageScoreRange(nil)
 	if sr != nil {
 		t.Error("PercentageScoreRange(nil) should return nil")
+	}
+}
+
+func TestLevelFromScoreNilFramework(t *testing.T) {
+	sr := &ScoreRange{
+		Min: 0.0,
+		Max: 10.0,
+		Ranges: []RangeEntry{
+			{LevelID: "critical", MinScore: 9.0},
+		},
+	}
+	level, err := sr.LevelFromScore(9.5)
+	if !errors.Is(err, ErrNilFramework) {
+		t.Errorf("LevelFromScore with nil framework err = %v, want ErrNilFramework", err)
+	}
+	if level != nil {
+		t.Errorf("LevelFromScore with nil framework level = %v, want nil", level)
+	}
+}
+
+func TestLevelFromScoreUnknownLevel(t *testing.T) {
+	sr := &ScoreRange{
+		Framework: Severity(),
+		Min:       0.0,
+		Max:       10.0,
+		Ranges: []RangeEntry{
+			{LevelID: "nonexistent", MinScore: 9.0},
+		},
+	}
+	level, err := sr.LevelFromScore(9.5)
+	if !errors.Is(err, ErrUnknownLevel) {
+		t.Errorf("LevelFromScore with unknown level err = %v, want ErrUnknownLevel", err)
+	}
+	if level != nil {
+		t.Errorf("LevelFromScore with unknown level level = %v, want nil", level)
 	}
 }
 

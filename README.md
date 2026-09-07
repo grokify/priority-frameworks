@@ -3,7 +3,6 @@
 [![Go CI][go-ci-svg]][go-ci-url]
 [![Go Lint][go-lint-svg]][go-lint-url]
 [![Go SAST][go-sast-svg]][go-sast-url]
-[![Go Report Card][goreport-svg]][goreport-url]
 [![Docs][docs-godoc-svg]][docs-godoc-url]
 [![Visualization][viz-svg]][viz-url]
 [![License][license-svg]][license-url]
@@ -14,8 +13,6 @@
  [go-lint-url]: https://github.com/grokify/priority-frameworks/actions/workflows/go-lint.yaml
  [go-sast-svg]: https://github.com/grokify/priority-frameworks/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
  [go-sast-url]: https://github.com/grokify/priority-frameworks/actions/workflows/go-sast-codeql.yaml
- [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/priority-frameworks
- [goreport-url]: https://goreportcard.com/report/github.com/grokify/priority-frameworks
  [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/priority-frameworks
  [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/priority-frameworks
  [viz-svg]: https://img.shields.io/badge/visualization-Go-blue.svg
@@ -81,7 +78,7 @@ lowest := framework.Lowest()   // Informational
 actionable := framework.ActionableLevels()
 
 // List all built-in frameworks
-ids := pf.AllBuiltinIDs()    // ["severity", "priority", "ietf", "moscow", "general"]
+ids := pf.AllBuiltinIDs()    // ["severity", "priority", "ietf", "ietf-prohibitions", "moscow", "general"]
 frameworks := pf.All()       // []*Framework
 ```
 

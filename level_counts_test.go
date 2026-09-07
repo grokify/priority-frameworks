@@ -165,6 +165,25 @@ func TestLevelCountsSlice(t *testing.T) {
 	}
 }
 
+func TestLevelCountsValid(t *testing.T) {
+	lc := NewLevelCounts(Severity())
+
+	if !lc.Valid("critical") {
+		t.Error("Valid(critical) = false, want true")
+	}
+	if !lc.Valid("S1") { // alias
+		t.Error("Valid(S1) = false, want true")
+	}
+	if lc.Valid("criticl") { // typo
+		t.Error("Valid(criticl) = true, want false")
+	}
+
+	// Nil framework: nothing is valid.
+	if NewLevelCounts(nil).Valid("critical") {
+		t.Error("Valid(critical) with nil framework = true, want false")
+	}
+}
+
 func TestLevelCountsNilFramework(t *testing.T) {
 	lc := NewLevelCounts(nil)
 
