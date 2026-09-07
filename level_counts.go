@@ -39,6 +39,16 @@ func (lc *LevelCounts) Increment(levelID string) {
 	lc.Add(levelID, 1)
 }
 
+// Valid reports whether levelID exists in the associated Framework.
+// Returns false if Framework is nil. Use this to guard Add/Increment
+// against typos, since those methods silently create unknown level keys.
+func (lc *LevelCounts) Valid(levelID string) bool {
+	if lc.Framework == nil {
+		return false
+	}
+	return lc.Framework.IndexOf(levelID) >= 0
+}
+
 // Get returns the count for the given level ID.
 // Returns 0 if the level is not found.
 func (lc *LevelCounts) Get(levelID string) int {
