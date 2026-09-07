@@ -7,6 +7,34 @@
   "maintainers": ["grokify"],
   "releases": [
     {
+      "version": "v0.3.0",
+      "date": "2026-09-07",
+      "commit": "8aceaba",
+      "highlights": [
+        { "description": "More accurate cross-framework normalization and safer score/level lookups" }
+      ],
+      "breaking": [
+        { "description": "`Normalize()`, `CompareAcross()`, and `MapTo()` now spread levels across the full range using index/(total-1); odd-level frameworks such as Severity and Priority map to different normalized buckets than before — re-check any persisted or compared normalization results", "commit": "81725ff" }
+      ],
+      "added": [
+        { "description": "`LevelCounts.Valid()` reports whether a level ID exists in the associated framework", "commit": "31b0609" },
+        { "description": "`ErrNilFramework` and `ErrUnknownLevel` sentinel errors returned by `ScoreRange.LevelFromScore()`", "commit": "b287159" }
+      ],
+      "fixed": [
+        { "description": "`ScoreRange.LevelFromScore()` no longer panics when `Framework` is nil and now surfaces an unrecognized level ID as `ErrUnknownLevel` instead of returning a nil level with no error", "commit": "b287159" },
+        { "description": "`MapTo()` returns a pointer to the destination slice element instead of a loop-local copy, matching `Parse()`", "commit": "81725ff" }
+      ],
+      "tests": [
+        { "description": "Add tests for normalization distribution, `LevelCounts.Valid()`, and the new `ScoreRange` error paths", "commit": "b287159" }
+      ],
+      "documentation": [
+        { "description": "Correct the `AllBuiltinIDs()` example to include `ietf-prohibitions`", "commit": "ff6ca91" }
+      ],
+      "build": [
+        { "description": "Require Go 1.25 to match the org toolchain standard", "commit": "4869aae" }
+      ]
+    },
+    {
       "version": "v0.2.0",
       "date": "2026-06-06",
       "commit": "f3e6a44",
