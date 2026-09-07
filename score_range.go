@@ -1,9 +1,19 @@
 package priorityframeworks
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 // ErrScoreOutOfRange is returned when a score is outside the defined ranges.
 var ErrScoreOutOfRange = errors.New("score out of range")
+
+// ErrNilFramework is returned when a ScoreRange has no associated Framework.
+var ErrNilFramework = errors.New("score range has no framework")
+
+// ErrUnknownLevel is returned when a matched RangeEntry references a level ID
+// that does not exist in the associated Framework.
+var ErrUnknownLevel = errors.New("range references unknown level")
 
 // ScoreRange maps numeric score ranges to framework levels.
 // This enables conversion from scoring systems (like CVSS) to priority levels.
@@ -33,9 +43,15 @@ type RangeEntry struct {
 }
 
 // LevelFromScore returns the level for the given score.
+// Returns nil and ErrNilFramework if Framework is not set.
 // Returns nil and ErrScoreOutOfRange if score is outside Min/Max bounds.
-// Returns nil if no matching range is found.
+// Returns nil and ErrUnknownLevel if the matched range references a level
+// that is not in the Framework.
+// Returns nil, nil if no matching range is found.
 func (sr *ScoreRange) LevelFromScore(score float64) (*Level, error) {
+	if sr.Framework == nil {
+		return nil, ErrNilFramework
+	}
 	if score < sr.Min || score > sr.Max {
 		return nil, ErrScoreOutOfRange
 	}
@@ -44,7 +60,10 @@ func (sr *ScoreRange) LevelFromScore(score float64) (*Level, error) {
 	// Ranges should be ordered from highest to lowest MinScore
 	for _, r := range sr.Ranges {
 		if score >= r.MinScore {
-			return sr.Framework.Parse(r.LevelID), nil
+			if level := sr.Framework.Parse(r.LevelID); level != nil {
+				return level, nil
+			}
+			return nil, fmt.Errorf("%w: %q", ErrUnknownLevel, r.LevelID)
 		}
 	}
 
