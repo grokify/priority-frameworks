@@ -63,11 +63,11 @@ func Severity() *Framework {
 		Name:        "Severity",
 		Description: "Security and incident severity levels. Common in vulnerability assessment and bug tracking.",
 		Levels: []Level{
-			{ID: "critical", Name: "Critical", Aliases: []string{"CRITICAL", "Crit", "S1"}, Actionable: true, Color: "#7f1d1d"},
+			{ID: "critical", Name: "Critical", Aliases: []string{"CRITICAL", "Crit", "CRIT", "crit", "S1"}, Actionable: true, Color: "#7f1d1d"},
 			{ID: "high", Name: "High", Aliases: []string{"HIGH", "S2"}, Actionable: true, Color: "#dc2626"},
-			{ID: "medium", Name: "Medium", Aliases: []string{"MEDIUM", "Med", "S3"}, Actionable: true, Color: "#ea580c"},
+			{ID: "medium", Name: "Medium", Aliases: []string{"MEDIUM", "Med", "MED", "med", "S3"}, Actionable: true, Color: "#ea580c"},
 			{ID: "low", Name: "Low", Aliases: []string{"LOW", "S4"}, Actionable: true, Color: "#ca8a04"},
-			{ID: "informational", Name: "Informational", Aliases: []string{"INFO", "Info", "S5"}, Actionable: false, Color: "#6b7280"},
+			{ID: "informational", Name: "Informational", Aliases: []string{"INFO", "Info", "info", "S5"}, Actionable: false, Color: "#6b7280"},
 		},
 	}
 }
