@@ -67,6 +67,12 @@ fmt.Println(level.Name)       // "Critical"
 fmt.Println(level.Actionable) // true
 fmt.Println(level.Color)      // "#7f1d1d"
 
+// Name and Abbreviation are both available — pick whichever fits the call
+// site (e.g. a full JSON field vs. a compact table column) rather than the
+// framework forcing one; a level with no distinct short form falls back to
+// Name.
+fmt.Println(framework.AbbreviationFor("critical")) // "CRIT"
+
 // Compare levels within a framework
 result := framework.Compare("critical", "low") // 1 (critical > low)
 

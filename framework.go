@@ -34,6 +34,19 @@ type Level struct {
 	// Aliases are alternative names that parse to this level.
 	Aliases []string `json:"aliases,omitempty" yaml:"aliases,omitempty"`
 
+	// Abbreviation is a short display form (e.g. "CRIT" for critical, "MED"
+	// for medium), offered alongside Name so a caller can choose which to
+	// emit for a given use case (e.g. a compact table column vs. a full
+	// JSON field) rather than the framework forcing one. It is always
+	// upper-case here as the single canonical value to build from — a
+	// caller wanting a different case (title case, lower case) applies that
+	// transform itself rather than the framework storing every case variant.
+	// Parsing accepted case variants (e.g. "Crit", "crit") is handled
+	// separately by Aliases; Abbreviation only affects emission. Empty when
+	// Name is already short enough that a separate abbreviation adds
+	// nothing (e.g. "P0", "MUST").
+	Abbreviation string `json:"abbreviation,omitempty" yaml:"abbreviation,omitempty"`
+
 	// Actionable indicates whether items at this level require action.
 	// For example, "Critical" and "Must have" are actionable; "Informational" is not.
 	Actionable bool `json:"actionable" yaml:"actionable"`
@@ -66,6 +79,23 @@ func (f *Framework) Parse(s string) *Level {
 		return nil
 	}
 	return &f.Levels[idx]
+}
+
+// AbbreviationFor returns the short display form for the level matching
+// idOrName — Level.Abbreviation if the level defines one, Level.Name
+// otherwise (so a caller always gets a sensible emit value even for a
+// framework/level with no distinct abbreviation), or "" if idOrName does
+// not match any level. Callers wanting the full form regardless should use
+// Parse(idOrName).Name directly instead.
+func (f *Framework) AbbreviationFor(idOrName string) string {
+	lvl := f.Parse(idOrName)
+	if lvl == nil {
+		return ""
+	}
+	if lvl.Abbreviation != "" {
+		return lvl.Abbreviation
+	}
+	return lvl.Name
 }
 
 // Default returns the default level (middle of the range).

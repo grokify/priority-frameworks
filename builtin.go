@@ -63,11 +63,11 @@ func Severity() *Framework {
 		Name:        "Severity",
 		Description: "Security and incident severity levels. Common in vulnerability assessment and bug tracking.",
 		Levels: []Level{
-			{ID: "critical", Name: "Critical", Aliases: []string{"CRITICAL", "Crit", "CRIT", "crit", "S1"}, Actionable: true, Color: "#7f1d1d"},
-			{ID: "high", Name: "High", Aliases: []string{"HIGH", "S2"}, Actionable: true, Color: "#dc2626"},
-			{ID: "medium", Name: "Medium", Aliases: []string{"MEDIUM", "Med", "MED", "med", "S3"}, Actionable: true, Color: "#ea580c"},
-			{ID: "low", Name: "Low", Aliases: []string{"LOW", "S4"}, Actionable: true, Color: "#ca8a04"},
-			{ID: "informational", Name: "Informational", Aliases: []string{"INFO", "Info", "info", "S5"}, Actionable: false, Color: "#6b7280"},
+			{ID: "critical", Name: "Critical", Abbreviation: "CRIT", Aliases: []string{"CRITICAL", "Crit", "CRIT", "crit", "S1"}, Actionable: true, Color: "#7f1d1d"},
+			{ID: "high", Name: "High", Abbreviation: "HIGH", Aliases: []string{"HIGH", "S2"}, Actionable: true, Color: "#dc2626"},
+			{ID: "medium", Name: "Medium", Abbreviation: "MED", Aliases: []string{"MEDIUM", "Med", "MED", "med", "S3"}, Actionable: true, Color: "#ea580c"},
+			{ID: "low", Name: "Low", Abbreviation: "LOW", Aliases: []string{"LOW", "S4"}, Actionable: true, Color: "#ca8a04"},
+			{ID: "informational", Name: "Informational", Abbreviation: "INFO", Aliases: []string{"INFO", "Info", "info", "S5"}, Actionable: false, Color: "#6b7280"},
 		},
 	}
 }
@@ -128,10 +128,10 @@ func MoSCoW() *Framework {
 		Name:        "MoSCoW",
 		Description: "Prioritization method for requirements. Must/Should/Could/Won't have.",
 		Levels: []Level{
-			{ID: "must", Name: "Must have", Aliases: []string{"Must", "M"}, Actionable: true, Color: "#dc2626"},
-			{ID: "should", Name: "Should have", Aliases: []string{"Should", "S"}, Actionable: true, Color: "#ea580c"},
-			{ID: "could", Name: "Could have", Aliases: []string{"Could", "C"}, Actionable: true, Color: "#ca8a04"},
-			{ID: "wont", Name: "Won't have", Aliases: []string{"Wont", "Won't", "W"}, Actionable: false, Color: "#6b7280"},
+			{ID: "must", Name: "Must have", Abbreviation: "M", Aliases: []string{"Must", "M"}, Actionable: true, Color: "#dc2626"},
+			{ID: "should", Name: "Should have", Abbreviation: "S", Aliases: []string{"Should", "S"}, Actionable: true, Color: "#ea580c"},
+			{ID: "could", Name: "Could have", Abbreviation: "C", Aliases: []string{"Could", "C"}, Actionable: true, Color: "#ca8a04"},
+			{ID: "wont", Name: "Won't have", Abbreviation: "W", Aliases: []string{"Wont", "Won't", "W"}, Actionable: false, Color: "#6b7280"},
 		},
 	}
 }
@@ -144,10 +144,10 @@ func General() *Framework {
 		Name:        "General",
 		Description: "General-purpose requirement levels. Simple and widely applicable.",
 		Levels: []Level{
-			{ID: "required", Name: "Required", Aliases: []string{"Req", "R"}, Actionable: true, Color: "#dc2626"},
-			{ID: "recommended", Name: "Recommended", Aliases: []string{"Rec"}, Actionable: true, Color: "#2563eb"},
-			{ID: "optional", Name: "Optional", Aliases: []string{"Opt", "O"}, Actionable: false, Color: "#16a34a"},
-			{ID: "avoid", Name: "Avoid", Aliases: []string{"Deprecated", "Dep"}, Actionable: false, Color: "#6b7280"},
+			{ID: "required", Name: "Required", Abbreviation: "REQ", Aliases: []string{"Req", "REQ", "R"}, Actionable: true, Color: "#dc2626"},
+			{ID: "recommended", Name: "Recommended", Abbreviation: "REC", Aliases: []string{"Rec", "REC"}, Actionable: true, Color: "#2563eb"},
+			{ID: "optional", Name: "Optional", Abbreviation: "OPT", Aliases: []string{"Opt", "OPT", "O"}, Actionable: false, Color: "#16a34a"},
+			{ID: "avoid", Name: "Avoid", Abbreviation: "AVD", Aliases: []string{"Deprecated", "Dep", "AVD"}, Actionable: false, Color: "#6b7280"},
 		},
 	}
 }

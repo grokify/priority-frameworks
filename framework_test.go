@@ -37,6 +37,31 @@ func TestFrameworkIndexOf(t *testing.T) {
 	}
 }
 
+func TestAbbreviationFor(t *testing.T) {
+	sev := Severity()
+	tests := []struct {
+		framework *Framework
+		input     string
+		want      string
+	}{
+		{sev, "critical", "CRIT"},
+		{sev, "Crit", "CRIT"}, // any accepted input form still emits the canonical abbreviation
+		{sev, "high", "HIGH"},
+		{sev, "medium", "MED"},
+		{sev, "low", "LOW"},
+		{sev, "informational", "INFO"},
+		{sev, "notfound", ""},
+		// Priority levels have no distinct Abbreviation; falls back to Name.
+		{Priority(), "p0", "P0"},
+		{MoSCoW(), "must", "M"},
+	}
+	for _, tt := range tests {
+		if got := tt.framework.AbbreviationFor(tt.input); got != tt.want {
+			t.Errorf("AbbreviationFor(%q) = %q, want %q", tt.input, got, tt.want)
+		}
+	}
+}
+
 func TestFrameworkParse(t *testing.T) {
 	f := MoSCoW()
 
