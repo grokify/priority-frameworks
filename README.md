@@ -4,6 +4,7 @@
 [![Go Lint][go-lint-svg]][go-lint-url]
 [![Go SAST][go-sast-svg]][go-sast-url]
 [![Docs][docs-godoc-svg]][docs-godoc-url]
+[![Docs][docs-mkdoc-svg]][docs-mkdoc-url]
 [![Visualization][viz-svg]][viz-url]
 [![License][license-svg]][license-url]
 
@@ -15,6 +16,8 @@
  [go-sast-url]: https://github.com/grokify/priority-frameworks/actions/workflows/go-sast-codeql.yaml
  [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/priority-frameworks
  [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/priority-frameworks
+ [docs-mkdoc-svg]: https://img.shields.io/badge/docs-MkDocs-blue.svg
+ [docs-mkdoc-url]: https://grokify.github.io/priority-frameworks
  [viz-svg]: https://img.shields.io/badge/visualization-Go-blue.svg
  [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=grokify%2Fpriority-frameworks
  [loc-svg]: https://tokei.rs/b1/github/grokify/priority-frameworks
